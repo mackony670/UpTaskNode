@@ -1,0 +1,12 @@
+extends base
+
+block content
+    .contenido-principal
+        .listado-pendientes#listado-pendientes
+                h1 #{nombrePagina}
+                h2 selecione un proyecto para empezar o agregue uno
+        
+        .panel.crear-proyecto
+                    .boton1
+                        a(href="/nuevo-proyecto" class="link-proyect") Nuevo proyecto 
+                            span  +
