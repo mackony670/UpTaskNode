@@ -58,7 +58,6 @@ app.set(
     'pug'
 );
 
-
 //añadir la carpeta de las vistas
 app.set(
     'views', 
