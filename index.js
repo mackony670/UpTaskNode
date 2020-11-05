@@ -10,7 +10,7 @@ const passport = require('./src/config/passport')
 
 
 
-//importando el/los helpers
+//importando el/los helpers y las rutas
 const helpers = require('./src/helpers/helpers')
 const routes = require('./src/routes');
 
@@ -52,6 +52,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser())
 
+
+//pasar el var dom a la app
+app.use((req, resp, next)=>{
+    resp.locals.vardump = helpers.vardump
+    resp.locals.mensajes = req.flash()
+    resp.locals.user = {...req.user } || null;
+    next();
+});
+
+
 //habilitar el template engine
 app.set(
     'view engine' , 
@@ -64,12 +74,6 @@ app.set(
     path.join(__dirname, './src/views')
 );
 
-//pasar el var dom a la app
-app.use((req, resp, next)=>{
-    resp.locals.vardump = helpers.vardump
-    resp.locals.mensajes = req.flash()
-    next();
-});
 
 
 
