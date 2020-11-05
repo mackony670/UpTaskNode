@@ -2,7 +2,10 @@ const Proyectos = require("../models/Proyectos");
 const Tareas = require("../models/Tareas");
 
 exports.Home = async (req, resp) => {
-  const proyectos = await Proyectos.findAll();
+  let UsuarioId = resp.locals.user.id
+  const proyectos = await Proyectos.findAll({where:{UsuarioId}});
+
+  
   resp.render("index", {
     nombrePagina: "proyectos ",
     proyectos,
@@ -10,7 +13,8 @@ exports.Home = async (req, resp) => {
 };
 
 exports.formulario_proyecto = async (req, resp) => {
-  const proyectos = await Proyectos.findAll();
+  let UsuarioId = resp.locals.user.id
+  const proyectos = await Proyectos.findAll({where:{UsuarioId}});
   resp.render("nuevoProyecto", {
     nombrePagina: "Crear un proyecto",
     proyectos,
@@ -18,8 +22,9 @@ exports.formulario_proyecto = async (req, resp) => {
 };
 
 exports.nuevoProyecto = async (req, resp) => {
-  const proyectos = await Proyectos.findAll();
-
+  
+  let UsuarioId = resp.locals.user.id
+  const proyectos = await Proyectos.findAll({where:{UsuarioId}});
   //enviar a la consola lo ue el usuario escriba
   //console.log(req.body)
 
@@ -44,18 +49,20 @@ exports.nuevoProyecto = async (req, resp) => {
   } else {
     //si llega aca es por que no hay errores
     //por ende hay que insertar en la BD
-    await Proyectos.create({ nombre });
+    await Proyectos.create({ nombre, UsuarioId });
     resp.redirect("/");
   }
 };
 
 //listar proyecto
 exports.proyectoUrl = async (req, resp, next) => {
-  const proyectosPromise = Proyectos.findAll();
+  let UsuarioId = resp.locals.user.id
+  const proyectosPromise = Proyectos.findAll({where:{UsuarioId}});
 
   const proyectoPromise = Proyectos.findOne({
     where: {
       url: req.params.url,
+      UsuarioId
     },
   });
 
@@ -83,11 +90,15 @@ exports.proyectoUrl = async (req, resp, next) => {
 };
 
 exports.formularioEditar = async (req, resp, next) => {
-  const proyectosPromise = Proyectos.findAll();
+
+  let UsuarioId = resp.locals.user.id
+  const proyectosPromise = findAll({where:{UsuarioId}});
+
 
   const proyectoPromise = Proyectos.findOne({
     where: {
       id: req.params.id,
+      UsuarioId
     },
   });
 
@@ -103,8 +114,9 @@ exports.formularioEditar = async (req, resp, next) => {
   });
 };
 exports.actualizarProyecto = async (req, resp) => {
-  0;
-  const proyectos = await Proyectos.findAll();
+  
+  let UsuarioId = resp.locals.user.id
+  const proyectos = await Proyectos.findAll({where:{UsuarioId}});
 
   //enviar a la consola lo ue el usuario escriba
   //console.log(req.body)
