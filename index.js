@@ -81,8 +81,11 @@ app.set(
 app.use('/', routes());
 
 
-let port = 7000
-app.listen(port, ()=>{
+//añadir puerto
+app.set('port',process.env.PORT || 7000);
 
-    console.log(`run inport ${port}`)
+
+app.listen(app.get('port'), ()=>{
+
+    console.log(`run on port ${app.get('port')}`)
 });
