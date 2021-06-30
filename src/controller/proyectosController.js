@@ -92,7 +92,7 @@ exports.proyectoUrl = async (req, resp, next) => {
 exports.formularioEditar = async (req, resp, next) => {
 
   let UsuarioId = resp.locals.user.id
-  const proyectosPromise = findAll({where:{UsuarioId}});
+  const proyectosPromise = Proyectos.findAll({where:{UsuarioId}});
 
 
   const proyectoPromise = Proyectos.findOne({
