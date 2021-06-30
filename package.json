@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run dev \" \"npm run watch \" ",
-    "start": "./index.js",
+    "start": "node ./index.js",
     "watch": "webpack --w --mode development"
   },
   "repository": {
@@ -24,6 +24,7 @@
     "concurrently": "^5.3.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
